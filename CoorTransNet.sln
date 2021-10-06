@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoorTransNet", "CoorTransNet.csproj", "{5B3D3B33-9AE1-417D-AA3C-6C8CD6522042}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoorTransNet", "CoorTransNet\CoorTransNet.csproj", "{5B3D3B33-9AE1-417D-AA3C-6C8CD6522042}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoorTransNet.Demo", "..\CoorTransNet.Demo\CoorTransNet.Demo.csproj", "{745969E2-C08B-4035-853D-3201EB52AFFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoorTransNet.Demo", ".\CoorTransNet.Demo\CoorTransNet.Demo.csproj", "{745969E2-C08B-4035-853D-3201EB52AFFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
