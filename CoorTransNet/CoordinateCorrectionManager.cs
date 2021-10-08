@@ -109,7 +109,7 @@ namespace CoorTransNet
          * * 火星坐标系 (GCJ-02) 与百度坐标系 (BD-09) 的转换算法 * * 将 BD-09 坐标转换成GCJ-02 坐标 * * @param 
          * bd_lat * @param bd_lon * @return 
          */
-        public static Coordinate bd09_To_Gcj02(double bd_lat, double bd_lon)
+        public static Coordinate BD09_To_Gcj02(double bd_lat, double bd_lon)
         {
             double x = bd_lon - 0.0065, y = bd_lat - 0.006;
             double z = Math.Sqrt(x * x + y * y) - 0.00002 * Math.Sin(y * Pi);
@@ -121,7 +121,7 @@ namespace CoorTransNet
         /** 
            * * 火星坐标系 (GCJ-02) to 84 * * @param lon * @param lat * @return 
            * */
-        public static Coordinate gcj_To_Gps84(Coordinate coord)
+        public static Coordinate GCJ_To_WGS84(Coordinate coord)
         {
             double g_x, g_y;
             Transform(coord.Lat, coord.Lon, out g_x, out g_y);
@@ -141,11 +141,11 @@ namespace CoorTransNet
          * @param bd_lon 
          * @return 
          */
-        public static Coordinate bd09_To_Gps84(double bd_lat, double bd_lon)
+        public static Coordinate BD09_To_WGS84(double bd_lat, double bd_lon)
         {
 
-            Coordinate gcj02 = bd09_To_Gcj02(bd_lat, bd_lon);
-            Coordinate map84 = gcj_To_Gps84(gcj02);
+            Coordinate gcj02 =BD09_To_Gcj02(bd_lat, bd_lon);
+            Coordinate map84 =GCJ_To_WGS84(gcj02);
             return map84;
 
         }
