@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("CoorTransNet")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Coordinate system transfer for net.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Rongyuan Studio")]
 [assembly: AssemblyProduct("CoorTransNet")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright ©  Li G. Q., 2021")]
+[assembly: AssemblyTrademark("Ronyuan")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型
