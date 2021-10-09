@@ -23,7 +23,7 @@ namespace CoorTransNet
         /// </summary>
         /// <param name="coord">原GCJ-02坐标</param>
         /// <returns>目标BD-09坐标,如果转换失败返回原坐标</returns>
-        public static Coordinate CoordConverGcj02ToBd09(Coordinate coord)
+        public static Coordinate GCJ02_To_Bd09(Coordinate coord)
         {
             var coordinate = new Coordinate { Loctype = LocationType.BD09 };
             double lon = coord.Lon;
@@ -47,15 +47,71 @@ namespace CoorTransNet
         }
 
         /// <summary>
+        /// 将GCJ-02 坐标转换成 BD-09 坐标
+        /// </summary>
+        /// <param name="coord">原GCJ-02坐标</param>
+        /// <returns>目标BD-09坐标,如果转换失败返回原坐标</returns>
+        public static Coordinate GCJ02_To_Bd09(double lon,double lat)
+        {
+            var coordinate = new Coordinate { Loctype = LocationType.BD09 };
+           
+            coordinate.Lat = lat;
+            coordinate.Lon = lon;
+            try
+            {
+                double bdx;
+                double bdy;
+                bd_encrypt(lat, lon, out bdy, out bdx);
+                coordinate.Lat = bdy;
+                coordinate.Lon = bdx;
+                return coordinate;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("将GCJ-02 坐标转换成 BD-09 坐标发生错误", ex);
+            }
+
+        }
+
+        /// <summary>
         /// 将WGS-84坐标转换为BD-09坐标时发生了异常
         /// </summary>
         /// <param name="coord">原WGS-84坐标</param>
         /// <returns>目标BD-09坐标,如果转换失败返回原坐标</returns>
-        public static Coordinate CoordConverWGS84_To_BD09(Coordinate coord)
+        public static Coordinate WGS84_To_BD09(Coordinate coord)
         {
             var coordinate = new Coordinate { Loctype = LocationType.BD09 };
             double lon = coord.Lon;
             double lat = coord.Lat;
+            double g_x, g_y;
+            coordinate.Lat = lat;
+            coordinate.Lon = lon;
+            try
+            {
+                Transform(lat, lon, out g_y, out g_x);
+                double bdx;
+                double bdy;
+                bd_encrypt(g_y, g_x, out bdy, out bdx);
+                coordinate.Lat = bdy;
+                coordinate.Lon = bdx;
+                return coordinate;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("将WGS-84坐标转换为BD-09坐标时发生了异常", ex);
+            }
+
+        }
+
+        /// <summary>
+        /// 将WGS-84坐标转换为BD-09坐标时发生了异常
+        /// </summary>
+        /// <param name="coord">原WGS-84坐标</param>
+        /// <returns>目标BD-09坐标,如果转换失败返回原坐标</returns>
+        public static Coordinate WGS84_To_BD09(double lon,double lat)
+        {
+            var coordinate = new Coordinate { Loctype = LocationType.BD09 };
+            
             double g_x, g_y;
             coordinate.Lat = lat;
             coordinate.Lon = lon;
@@ -82,11 +138,36 @@ namespace CoorTransNet
         /// </summary>
         /// <param name="coord">原WGS-84坐标</param>
         /// <returns>目标GCJ-02坐标,如果转换失败返回原坐标</returns>
-        public static Coordinate CoordConverWGS84_To_GCJ02(Coordinate coord)
+        public static Coordinate WGS84_To_GCJ02(Coordinate coord)
         {
             var coordinate = new Coordinate { Loctype = LocationType.GCJ02 };
             double lon = coord.Lon;
             double lat = coord.Lat;
+            double g_x = lon, g_y = lat;
+            coordinate.Lat = lat;
+            coordinate.Lon = lon;
+            try
+            {
+                Transform(lat, lon, out g_y, out g_x);
+                coordinate.Lat = g_y;
+                coordinate.Lon = g_x;
+                return coordinate;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("将WGS-84坐标转换为GCJ-02坐标时发生了异常", ex);
+            }
+
+        }
+
+        /// <summary>
+        /// 将WGS-84坐标转换为GCJ-02坐标时发生了异常
+        /// </summary>
+        /// <param name="coord">原WGS-84坐标</param>
+        /// <returns>目标GCJ-02坐标,如果转换失败返回原坐标</returns>
+        public static Coordinate WGS84_To_GCJ02(double lon,double lat)
+        {
+            var coordinate = new Coordinate { Loctype = LocationType.GCJ02 };           
             double g_x = lon, g_y = lat;
             coordinate.Lat = lat;
             coordinate.Lon = lon;
