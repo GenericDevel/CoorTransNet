@@ -119,5 +119,45 @@ namespace CoorTransNet
             }
             return pt;
         }
+
+        /// <summary>
+        /// Transfer the point with a origine coordination system to the target point with a new coordination system 
+        /// </summary>
+        /// <param name="po"> origine point</param>
+        /// <param name="M"> seven parameter matrix </param>
+        /// <returns>target point</returns>
+        public static Point Transfer(Point po, Matrix[] M)
+        {
+            Point pt;
+            Matrix X = M[0];
+            Matrix B = new Matrix(3, 7);
+            Matrix Pt;
+
+            B[0, 0] = 1;
+            B[0, 1] = 0;
+            B[0, 2] = 0;
+            B[0, 3] = 0;
+            B[0, 4] = -po.Z;
+            B[0, 5] = po.Y;
+            B[0, 6] = po.X;
+            B[0 + 1, 0] = 0;
+            B[0 + 1, 1] = 1;
+            B[1, 2] = 0;
+            B[1, 3] = po.Z;
+            B[1, 4] = 0;
+            B[1, 5] = -po.X;
+            B[1, 6] = po.Y;
+            B[2, 0] = 0;
+            B[2, 1] = 0;
+            B[2, 2] = 1;
+            B[2, 3] = -po.Y;
+            B[2, 4] = po.X;
+            B[2, 5] = 0;
+            B[2, 6] = po.Z;
+            Pt = B * X;
+            pt = new Point(Pt[0, 0], Pt[1, 0], Pt[2, 0]);
+
+            return pt;
+        }
     }
 }
